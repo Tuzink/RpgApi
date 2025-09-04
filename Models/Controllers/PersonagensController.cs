@@ -49,6 +49,28 @@ namespace RPGAPI.Models.Controllers
         {
             personagens.Add(novoPersonagem);
             return Ok(personagens);
+        }
+
+        [HttpPut]
+        public IActionResult UpdatePersoanagem(Personagem p)
+        {
+            Personagem personagemAlterado = personagens.Find(pers => pers.Id == p.Id);
+            personagemAlterado.Nome = p.Nome;
+            personagemAlterado.PontosVida = p.PontosVida;
+            personagemAlterado.Forca = p.Forca;
+            personagemAlterado.Defesa = p.Defesa;
+            personagemAlterado.Inteligencia = p.Inteligencia;
+            personagemAlterado.Classe = p.Classe;
+
+            return Ok(personagens);
+        }
+
+        [HttpDelete("{Id}")]
+        public IActionResult Delete(int Id)
+        {
+            personagens.RemoveAll(pers => pers.Id == Id);
+
+            return Ok(personagens);
         }  
 
 
